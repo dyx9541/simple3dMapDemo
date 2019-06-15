@@ -1,9 +1,12 @@
 # simple3dMapDemo
 一个简单的动态3d地图demo，可以拿来做大屏展示。
 
+
 1.软件定位，软件的基本功能
 
     主要用于大屏展示，也可以作为炫酷的界面，只要你在上面加加加
+    ![Image text](https://github.com/dyx9541/simple3dMapDemo/blob/master/public/images/%E7%A6%8F%E5%BB%BA1.gif)
+
    
 2.运行代码的方法：安装环境，启动命令等
 
@@ -23,6 +26,7 @@
     s1 装依赖包 在package.json的目录打开 命令行窗口，输入cnpm install
 
     s2 装完了，右击下图这个绿色的小三角运行项目
+![Image text](https://raw.githubusercontent.com/dyx9541/simple3dMapDemo/master/public/images/QQ%E6%88%AA%E5%9B%BE20190615134031.png)
 
     s3 在浏览器输入 http://localhost:6111/,就能看到像截图中的界面了
 
