@@ -5,7 +5,9 @@
 1.软件定位，软件的基本功能
 
     主要用于大屏展示，也可以作为炫酷的界面，只要你在上面加加加
-    ![Image text](https://raw.githubusercontent.com/dyx9541/simple3dMapDemo/master/public/images/福建1.gif)
+   
+    效果图：
+![Image text](https://raw.githubusercontent.com/dyx9541/simple3dMapDemo/master/public/images/demo.gif)
 
    
 2.运行代码的方法：安装环境，启动命令等
