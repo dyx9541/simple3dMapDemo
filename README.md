@@ -10,7 +10,7 @@
  
  ![Image text](https://raw.githubusercontent.com/dyx9541/simple3dMapDemo/master/public/images/demo1.png)
     
-    图片太大github不给显示，所以模糊了
+    gif图片太大github不给显示，所以模糊了
 ![Image text](https://raw.githubusercontent.com/dyx9541/simple3dMapDemo/master/public/images/demo.gif)
 
    
@@ -26,8 +26,8 @@
   2）如何启动呢？
   
     s0 首先，
-       a.你要去mapbox 上注册一个账号，获得免费的token;
-       b.在mapbox的studio上制作你想要的底图，当然不想做也可以用项目中现成的
+       a.你要去mapbox 上注册一个账号，获得免费的token，当然不想做也可以用项目中现成的;
+       b.在mapbox的studio上制作你想要的底图，当然不想做也可以用项目中现成的;
        c.电脑有node.js
 
     s1 装依赖包 在package.json的目录打开 命令行窗口，输入cnpm install
@@ -48,4 +48,7 @@
 
 5.常见问题说明
 
-    有问题请留言，页面中的图片是随便找的，侵删。
+    有问题请留言.
+    页面中的图片:
+  ![Image text](https://raw.githubusercontent.com/dyx9541/simple3dMapDemo/master/public/images/building.png)  
+    是随便找的，侵删。
