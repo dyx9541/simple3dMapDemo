@@ -18,16 +18,17 @@
 
   1）概述
   
-    框架：mapbox gl+node.js
+    框架：mapbox gl + node.js express app
     运行环境：node.js
 
-    gis框架是mapbox gl，找了半天，就这个框架支持2.5d地图的（当然后来发现高德也可以，但是没有这么炫的背景地图,因此采用mapbox）
+    gis框架是mapbox gl，找了半天，就这个框架支持2.5d地图的（当然后来发现高德也可以，但是没有这么炫的背景地图, 因此采用mapbox）
 
   2）如何启动呢？
   
     s0 首先，
        a.你要去mapbox 上注册一个账号，获得免费的token;
-       b.电脑有node.js
+       b.在mapbox的studio上制作你想要的底图，当然不想做也可以用项目中现成的
+       c.电脑有node.js
 
     s1 装依赖包 在package.json的目录打开 命令行窗口，输入cnpm install
 
