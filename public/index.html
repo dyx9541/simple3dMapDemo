@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'/>
+    <title> </title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet'/>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<style>
+    button {
+        position: absolute;
+        margin: 20px;
+    }
+
+    #pause::after {
+        content: 'Pause';
+    }
+
+    #pause.pause::after {
+        content: 'Play';
+    }
+</style>
+<div id='map'></div>
+<!--<button id='pause'></button>-->
+<script>
+
+    var pointsInFujian = {
+        "type": "FeatureCollection",
+        "features": [{
+            "type": "Feature",
+            "properties": {
+                "name": "福州"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [119.2841444804, 26.0419404245]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "name": "宁德"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [119.5751870681, 26.6278181623]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "name": "南平"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [118.2128920519, 26.5983583582]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "name": "三明"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [117.6470743947, 26.2392165415]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "name": "莆田"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [119.0478343876, 25.3936550943]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "name": "龙岩"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [117.0208515761, 25.0457821238]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "name": "泉州"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [118.6633099648, 24.8515413710]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "name": "漳州"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [117.6800414415, 24.4921445604]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "name": "厦门"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [118.1030265493, 24.4671536530]
+            }
+        }]
+    };
+
+
+    /**
+     * 获取p1 和 p2 之间的点 十等分
+     * @param p1
+     * @param p2
+     * @returns {Array}
+     */
+    function linearP1P2(p1, p2) {
+        var times = 100;
+        var dx = (p2[0] - p1[0]) / (times - 1);
+        var dy = (p2[1] - p1[1]) / (times - 1);
+        var resultArray = [];
+        for (var i = 0; i < times; i++) {
+            resultArray.push([p1[0] + i * dx, p1[1] + i * dy]);
+        }
+        // resultArray.push([p2[0], p2[1]]);
+        return resultArray;
+
+    }
+
+    /**
+     * 这个地方mapboxgl.accessToken 是你在maobox上申请的token
+     * @type {mapboxgl.Map}
+     */
+    mapboxgl.accessToken = '申请的token';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/dyx365/cju0wlfpo0s0o1fp1yswvhwyg',
+        center: [119.2841444804, 26.0419404245],
+        zoom: 7
+    });
+
+    // Create a GeoJSON source with an empty lineString.
+    var fzLines = {
+        "type": "FeatureCollection",
+        "features": [{
+            "type": "Feature",
+            "properties": {"name": "福州"},
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [119.2841444804, 26.0419404245]
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {"name": "福州"},
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [119.2841444804, 26.0419404245]
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {"name": "福州"},
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [119.2841444804, 26.0419404245]
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {"name": "福州"},
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [119.2841444804, 26.0419404245]
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {"name": "福州"},
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [119.2841444804, 26.0419404245]
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {"name": "福州"},
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [119.2841444804, 26.0419404245]
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {"name": "福州"},
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [119.2841444804, 26.0419404245]
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {"name": "福州"},
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [119.2841444804, 26.0419404245]
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {"name": "福州"},
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [119.2841444804, 26.0419404245]
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {"name": "福州"},
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                    [119.2841444804, 26.0419404245]
+                ]
+            }
+        }]
+    };
+    var bak_fzLines = fzLines;
+
+    //福州→宁德...
+    var fuZhou = pointsInFujian.features.filter(function (data) {
+        return data["properties"]["name"] === "福州";
+    })[0].geometry.coordinates;
+    var ningDe = pointsInFujian.features.filter(function (data) {
+        return data["properties"]["name"] === "宁德";
+    })[0].geometry.coordinates;
+    var nanPing = pointsInFujian.features.filter(function (data) {
+        return data["properties"]["name"] === "南平";
+    })[0].geometry.coordinates;
+    var sanMing = pointsInFujian.features.filter(function (data) {
+        return data["properties"]["name"] === "三明";
+    })[0].geometry.coordinates;
+    var puTian = pointsInFujian.features.filter(function (data) {
+        return data["properties"]["name"] === "莆田";
+    })[0].geometry.coordinates;
+    var longYan = pointsInFujian.features.filter(function (data) {
+        return data["properties"]["name"] === "龙岩";
+    })[0].geometry.coordinates;
+    var quanZhou = pointsInFujian.features.filter(function (data) {
+        return data["properties"]["name"] === "泉州";
+    })[0].geometry.coordinates;
+    var zhangZhou = pointsInFujian.features.filter(function (data) {
+        return data["properties"]["name"] === "漳州";
+    })[0].geometry.coordinates;
+    var xiaMen = pointsInFujian.features.filter(function (data) {
+        return data["properties"]["name"] === "厦门";
+    })[0].geometry.coordinates;
+
+
+    var fz2nd = linearP1P2(fuZhou, ningDe);
+    var fz2np = linearP1P2(fuZhou, nanPing);
+    var fz2sm = linearP1P2(fuZhou, sanMing);
+    var fz2pt = linearP1P2(fuZhou, puTian);
+    var fz2ly = linearP1P2(fuZhou, longYan);
+    var fz2qz = linearP1P2(fuZhou, quanZhou);
+    var fz2zz = linearP1P2(fuZhou, zhangZhou);
+    var fz2xm = linearP1P2(fuZhou, xiaMen);
+
+    console.log(fz2nd)
+
+    var speedFactor = 5; // number of frames per longitude degree每经度度的帧数
+    var animation; // to store and cancel the animation
+    var startTime = 0;
+    var progress = 0; // progress = timestamp - startTime
+    var resetTime = false; // indicator of whether time reset is needed for the animation
+    // var pauseButton = document.getElementById('pause');
+
+    map.on('load', function () {
+
+        var features = pointsInFujian.features;
+        for (var i = 0; i < features.length; i++) {
+            var coords = features[i].geometry.coordinates;
+            var props = features[i].properties;
+            if (!props.cluster) continue;
+            var id = props.cluster_id;
+
+            var marker = markers[id];
+            if (!marker) {
+                var el = createDonutChart(props);
+                marker = markers[id] = new mapboxgl.Marker({element: el}).setLngLat(coords);
+            }
+            newMarkers[id] = marker;
+
+            if (!markersOnScreen[id])
+                marker.addTo(map);
+        }
+
+        //添加图标
+        map.loadImage('../images/building1.png', function (error, image) {
+            if (error) throw error;
+            map.addImage('cat', image);
+            map.addLayer({
+                "id": "points",
+                "type": "symbol",
+                "source": {
+                    "type": "geojson",
+                    "data": pointsInFujian
+                },
+                "layout": {
+                    "icon-image": "cat",
+                    "icon-size": 0.5,
+                    "text-field": ["get", "name"],
+                    "text-variable-anchor": ["top", "bottom", "left", "right"],
+                    "text-radial-offset": 0.5,
+                    // "text-anchor": "bottom",
+                    'text-size':22,
+
+                    "text-offset": [50,50]
+                }, 'paint': {
+
+                    'text-color': '#fff',
+                    'text-halo-blur': 2
+                }
+            });
+        });
+
+
+        // add the line which will be modified in the animation
+        map.addLayer({
+            'id': 'line-animation',
+            'type': 'line',
+            'source': {
+                'type': 'geojson',
+                'data': fzLines
+            },
+            'layout': {
+                'line-cap': 'round',
+                'line-join': 'round'
+            },
+            'paint': {
+                'line-color': '#ede825',
+                'line-width': 5,
+                'line-opacity': 1
+            }
+        });
+
+
+        startTime = performance.now();
+
+        animateLine1();
+
+
+        // reset startTime and progress once the tab loses or gains focus
+        // requestAnimationFrame also pauses on hidden tabs by default
+        document.addEventListener('visibilitychange', function () {
+            resetTime = true;
+        });
+
+        // animated in a circle as a sine wave along the map.
+        //在一个圈上动画，在地图上看就像一个波浪
+        function animateLine1(timestamp) {
+            if (resetTime) {
+                // resume previous progress
+                startTime = performance.now() - progress;
+                resetTime = false;
+            } else {
+                progress = timestamp - startTime;
+            }
+
+            // restart if it finishes a loop
+            //如果完成一个循环则重新开始
+            if (progress > speedFactor * 360) {
+                startTime = timestamp;
+                fzLines = bak_fzLines;
+                map.getSource('line-animation').setData(bak_fzLines);
+            } else {
+
+                var x = progress / speedFactor;
+
+                // console.log(parseInt(x))
+                // console.log(parseInt(x * 10 / 36) % 100);
+
+                let index = parseInt(x * 10 / 36) % 100  //0.1.2.3.4.5.6.7.8.9
+
+                if (index > -1) {
+
+                    if (index === 0) {
+                        fzLines.features[0].geometry.coordinates = fzLines.features[0].geometry.coordinates.slice(0, 0)
+                        fzLines.features[1].geometry.coordinates = fzLines.features[1].geometry.coordinates.slice(0, 0)
+                        fzLines.features[2].geometry.coordinates = fzLines.features[2].geometry.coordinates.slice(0, 0)
+                        fzLines.features[3].geometry.coordinates = fzLines.features[3].geometry.coordinates.slice(0, 0)
+                        fzLines.features[4].geometry.coordinates = fzLines.features[4].geometry.coordinates.slice(0, 0)
+                        fzLines.features[5].geometry.coordinates = fzLines.features[5].geometry.coordinates.slice(0, 0)
+                        fzLines.features[6].geometry.coordinates = fzLines.features[6].geometry.coordinates.slice(0, 0)
+                        fzLines.features[7].geometry.coordinates = fzLines.features[7].geometry.coordinates.slice(0, 0)
+                    }
+
+                    // // append new coordinates to the lineString
+                    fzLines.features[0].geometry.coordinates.push(fz2nd[index]);
+                    fzLines.features[1].geometry.coordinates.push(fz2np[index]);
+                    fzLines.features[2].geometry.coordinates.push(fz2sm[index]);
+                    fzLines.features[3].geometry.coordinates.push(fz2pt[index]);
+                    fzLines.features[4].geometry.coordinates.push(fz2ly[index]);
+                    fzLines.features[5].geometry.coordinates.push(fz2qz[index]);
+                    fzLines.features[6].geometry.coordinates.push(fz2zz[index]);
+                    fzLines.features[7].geometry.coordinates.push(fz2xm[index]);
+
+                    map.getSource('line-animation').setData(fzLines);
+                }
+            }
+            // Request the next frame of the animation.
+            animation = requestAnimationFrame(animateLine1);
+        }
+    });
+
+</script>
+</body>
+</html>
