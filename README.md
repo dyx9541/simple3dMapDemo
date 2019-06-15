@@ -7,6 +7,9 @@
     主要用于大屏展示，也可以作为炫酷的界面，只要你在上面加加加
    
     效果图：
+    ![Image text](https://raw.githubusercontent.com/dyx9541/simple3dMapDemo/master/public/images/demo1.png)
+    
+    图片太大github不给显示，所以模糊了
 ![Image text](https://raw.githubusercontent.com/dyx9541/simple3dMapDemo/master/public/images/demo.gif)
 
    
