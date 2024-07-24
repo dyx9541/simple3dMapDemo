@@ -1,6 +1,5 @@
 # simple3dMapDemo
-一个简单的动态3d地图demo，可以拿来做大屏展示。
-A simple dynamic 3D map demo which you can use to make a large screen display build in LED.
+一个简单的动态3d地图demo，可以拿来做大屏展示。 
  
 
 1.软件定位，软件的基本功能
